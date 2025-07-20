@@ -4,6 +4,12 @@
 
 This repository serves as a **GitHub template** for building Model Context Protocol (MCP) servers with GitHub OAuth authentication, deployed on Cloudflare Workers.
 
+## 🙏 Credits
+
+This template is based on the excellent work by [@coleam00](https://github.com/coleam00) in their original repository: [remote-mcp-server-with-auth](https://github.com/coleam00/remote-mcp-server-with-auth).
+
+We extend our gratitude to [@coleam00](https://github.com/coleam00) for creating the foundation that made this template possible.
+
 ## 🎯 What This Template Provides
 
 - **🔐 GitHub OAuth Authentication** - Secure user authentication with role-based access
