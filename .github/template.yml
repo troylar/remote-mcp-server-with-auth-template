@@ -1,0 +1,29 @@
+name: MCP Server Template
+description: A production-ready Model Context Protocol (MCP) server with GitHub OAuth authentication
+visibility: public
+
+variables:
+  - name: project_name
+    description: The name of your MCP server project
+    required: true
+    default: "my-mcp-server"
+    
+  - name: project_description
+    description: A brief description of what your MCP server does
+    required: true
+    default: "A Model Context Protocol server with GitHub OAuth authentication"
+    
+  - name: author_name
+    description: Your name or organization name
+    required: true
+    default: "Your Name"
+    
+  - name: github_username
+    description: Your GitHub username
+    required: true
+    default: "your-username"
+    
+  - name: kv_namespace_id
+    description: Cloudflare KV namespace ID (you'll get this after running 'wrangler kv namespace create OAUTH_KV')
+    required: false
+    default: "your-kv-namespace-id" 

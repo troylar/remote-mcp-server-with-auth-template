@@ -13,6 +13,49 @@ if [ ! -d ".git" ]; then
     exit 1
 fi
 
+# Check if template variables need to be replaced
+if grep -q "{{project_name}}" package.json; then
+    echo "🔧 Template variables detected. Let's configure your project..."
+    echo ""
+    
+    # Get project name
+    read -p "Enter your project name (e.g., my-mcp-server): " PROJECT_NAME
+    PROJECT_NAME=${PROJECT_NAME:-"my-mcp-server"}
+    
+    # Get project description
+    read -p "Enter project description: " PROJECT_DESCRIPTION
+    PROJECT_DESCRIPTION=${PROJECT_DESCRIPTION:-"A Model Context Protocol server with GitHub OAuth authentication"}
+    
+    # Get author name
+    read -p "Enter your name: " AUTHOR_NAME
+    AUTHOR_NAME=${AUTHOR_NAME:-"Your Name"}
+    
+    # Get GitHub username
+    read -p "Enter your GitHub username: " GITHUB_USERNAME
+    GITHUB_USERNAME=${GITHUB_USERNAME:-"your-username"}
+    
+    # Get KV namespace ID
+    read -p "Enter Cloudflare KV namespace ID (or press Enter to skip): " KV_NAMESPACE_ID
+    KV_NAMESPACE_ID=${KV_NAMESPACE_ID:-"your-kv-namespace-id"}
+    
+    echo ""
+    echo "🔄 Replacing template variables..."
+    
+    # Replace variables in files
+    find . -type f \( -name "*.json" -o -name "*.md" -o -name "*.jsonc" \) -exec sed -i.bak \
+        -e "s/{{project_name}}/$PROJECT_NAME/g" \
+        -e "s/{{project_description}}/$PROJECT_DESCRIPTION/g" \
+        -e "s/{{author_name}}/$AUTHOR_NAME/g" \
+        -e "s/{{github_username}}/$GITHUB_USERNAME/g" \
+        -e "s/{{kv_namespace_id}}/$KV_NAMESPACE_ID/g" {} \;
+    
+    # Clean up backup files
+    find . -name "*.bak" -delete
+    
+    echo "✅ Template variables replaced!"
+    echo ""
+fi
+
 # Check if Node.js is installed
 if ! command -v node &> /dev/null; then
     echo "❌ Error: Node.js is not installed. Please install Node.js first."
