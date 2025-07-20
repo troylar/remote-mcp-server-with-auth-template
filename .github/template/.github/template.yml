@@ -1,0 +1,67 @@
+# GitHub Template Configuration
+# This file configures how the template behaves when creating new repositories
+
+# Template metadata
+name: "MCP Server with GitHub OAuth"
+description: "A production-ready Model Context Protocol (MCP) server template with GitHub OAuth authentication, built on Cloudflare Workers"
+
+# Template variables that will be replaced when creating new repositories
+variables:
+  - name: "project_name"
+    description: "The name of your MCP server project"
+    default: "my-mcp-server"
+    required: true
+  - name: "project_description"
+    description: "A brief description of what your MCP server does"
+    default: "A Model Context Protocol (MCP) server built with Cloudflare Workers"
+    required: false
+  - name: "author_name"
+    description: "Your name or organization name"
+    default: "Your Name"
+    required: false
+  - name: "github_username"
+    description: "Your GitHub username"
+    default: "your-username"
+    required: false
+  - name: "kv_namespace_id"
+    description: "Cloudflare KV namespace ID (you'll get this after running 'wrangler kv namespace create OAUTH_KV')"
+    default: "your-kv-namespace-id"
+    required: false
+
+# Files that should be renamed based on project name
+files_to_rename:
+  - from: "{{project_name}}"
+    to: "project_name"
+
+# Post-creation instructions
+post_create_instructions:
+  - "Install dependencies: npm install"
+  - "Copy .dev.vars.example to .dev.vars and configure your environment variables"
+  - "Create a GitHub OAuth app at https://github.com/settings/developers"
+  - "Generate a cookie encryption key: openssl rand -hex 32"
+  - "Create a KV namespace: wrangler kv namespace create OAUTH_KV"
+  - "Update wrangler.jsonc with your KV namespace ID"
+  - "Run locally: npm run dev"
+  - "Test with MCP Inspector: npx @modelcontextprotocol/inspector@latest"
+
+# Template features
+features:
+  - "GitHub OAuth Authentication"
+  - "Cloudflare Workers Deployment"
+  - "PostgreSQL Database Integration"
+  - "Modular Tool Architecture"
+  - "TypeScript Support"
+  - "Comprehensive Testing"
+  - "Production Monitoring"
+  - "Security Best Practices"
+
+# Template tags
+tags:
+  - "mcp"
+  - "model-context-protocol"
+  - "cloudflare-workers"
+  - "oauth"
+  - "github"
+  - "typescript"
+  - "postgresql"
+  - "authentication" 

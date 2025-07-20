@@ -1,0 +1,38 @@
+name: Setup Template
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Type check
+      run: npm run type-check
+    
+    - name: Run tests
+      run: npm test
+    
+    - name: Check for template placeholders
+      run: |
+        echo "Checking for template placeholders..."
+        if grep -r "{{project_name}}" . --exclude-dir=node_modules --exclude-dir=.git; then
+          echo "Warning: Template placeholders found. Make sure to replace them with actual values."
+          exit 1
+        fi
+        echo "No template placeholders found. Template setup complete!" 
