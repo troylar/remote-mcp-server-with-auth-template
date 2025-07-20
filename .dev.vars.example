@@ -1,0 +1,11 @@
+# GitHub OAuth (required)
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_client_secret
+COOKIE_ENCRYPTION_KEY=your_random_encryption_key
+
+# Database Connection (if using database tools)
+DATABASE_URL=postgresql://username:password@localhost:5432/database_name
+
+# Optional: Sentry monitoring
+SENTRY_DSN=https://your-sentry-dsn@sentry.io/project-id
+NODE_ENV=development 
